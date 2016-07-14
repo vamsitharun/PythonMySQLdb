@@ -1,4 +1,4 @@
-"""  MySQLdb """
+"""  MySQLdb in python """
 import mysql.connector
 
 conn = mysql.connector.connect(user='root', password='', host='localhost', database='pydb')
