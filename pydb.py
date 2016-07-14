@@ -1,6 +1,4 @@
 import mysql.connector
-# from HTMLParser import HTMLParser
-from dominate.tags import *
 
 conn = mysql.connector.connect(user='root', password='', host='localhost', database='pydb')
 mycursor = conn.cursor()
