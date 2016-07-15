@@ -30,14 +30,21 @@ while 1:
         tablen = mycursor.fetchall()
         if Tablename not in tablen:
                 noOfColumns = input("Enter number of columns you want:")
-                print "k good %d columns and constraints you want to give" % int(noOfColumns)
-                for i in noOfColumns:
-                    col1 = input("Enter Column Name:")
+                print "k good, Give the column details"
+                templist = " "
+                finallist = []
+                for i in range(noOfColumns):
+                    colname = input("Enter Column Name:")
+                    templist += colname + ' '
                     Datatype = input("Enter datatype:")
+                    templist += Datatype
                     length = input("Enter length:")
-            mycursor.execute("CREATE TABLE %s" % Tablename)
-            conn.commit()
-            print "Successfully created the table"
+                    templist = templist + "(" +length +")" + ', '
+                finallist.append(templist)
+                str1 = ''.join(finallist)
+                mycursor.execute("CREATE TABLE %s (%s)" % (Tablename, str1))
+                conn.commit()
+                print "Successfully created the table"
         else:
             print "Table already exist in pydb Database"
 
