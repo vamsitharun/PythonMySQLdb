@@ -33,7 +33,6 @@ while 1:
                 print "k good, Give the column details"
                 templist = " "
                 finallist = []
-                #str1 = " "
                 for i in range(noOfColumns):
                     if i == noOfColumns-1:
                         s = ' '
@@ -53,10 +52,14 @@ while 1:
         else:
             print "Table already exist in pydb Database"
 
-    def insertData(name,age,email,address):
-        mycursor.execute(
-            "INSERT INTO record(NAME,AGE,EMAIL,ADDRESS) VALUES('%s',%d,'%s','%s')" % (name, age, email, address)
-        )
+    def insertData():
+        tname = input("Enter Table Name:")
+        mycursor.execute("DESCRIBE %s" % tname)
+        print mycursor.fetchall()
+
+        # mycursor.execute(
+        #     "INSERT INTO tname(NAME,AGE,EMAIL,ADDRESS) VALUES('%s',%d,'%s','%s')" % (name, age, email, address)
+        # )
         conn.commit()
         print "Data Successfully Inserted"
 
