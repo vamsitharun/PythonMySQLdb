@@ -33,15 +33,20 @@ while 1:
                 print "k good, Give the column details"
                 templist = " "
                 finallist = []
+                #str1 = " "
                 for i in range(noOfColumns):
+                    if i == noOfColumns-1:
+                        s = ' '
+                    else:
+                        s = ', '
                     colname = input("Enter Column Name:")
                     templist += colname + ' '
                     Datatype = input("Enter datatype:")
-                    templist += Datatype
+                    templist +=  Datatype + ' '
                     length = input("Enter length:")
-                    templist = templist + "(" +length +")" + ', '
+                    templist +=  '(' + length + ')' + s
                 finallist.append(templist)
-                str1 = ''.join(finallist)
+                str1 = " ".join(finallist)
                 mycursor.execute("CREATE TABLE %s (%s)" % (Tablename, str1))
                 conn.commit()
                 print "Successfully created the table"
