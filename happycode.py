@@ -1,4 +1,5 @@
 """  MySQLdb in python """
+#!/usr/bin/python
 import mysql.connector
 
 conn = mysql.connector.connect(user='root', password='', host='localhost', database='pydb')
@@ -23,12 +24,12 @@ while 1:
         mycursor.execute("SELECT * FROM %s" % str(tname))
         print mycursor.fetchall()
 
-
+    # Create Table in pydb database
     def CreateTable():
         Tablename = input("Enter New Table Name:")
-        mycursor.execute("SHOW TABLES")
+        mycursor.execute("SHOW TABLES LIKE '%s' " % str(Tablename))
         tablen = mycursor.fetchall()
-        if Tablename not in tablen:
+        if not tablen:
                 noOfColumns = input("Enter number of columns you want:")
                 print "k good, Give the column details"
                 templist = " "
@@ -52,15 +53,22 @@ while 1:
         else:
             print "Table already exist in pydb Database"
 
-    def insertData():
+    def _insertData(name,age):
         tname = input("Enter Table Name:")
         mycursor.execute("DESCRIBE %s" % tname)
         print mycursor.fetchall()
-
-        # mycursor.execute(
-        #     "INSERT INTO tname(NAME,AGE,EMAIL,ADDRESS) VALUES('%s',%d,'%s','%s')" % (name, age, email, address)
-        # )
+        mycursor.execute(
+             "INSERT INTO %s(NAME,AGE) VALUES('%s',%d)" % (tname, name, age)
+        )
         conn.commit()
         print "Data Successfully Inserted"
+
+    def definitions():
+         print 'MySQLVname() - It will display the MySQL version' \
+              ' \n dbName() - It will display the present database name' \
+              '\n tableNames() - It will display the tables in present database' \
+              '\n RetData() - It will retrive the data from the selected table' \
+              '\n CreateTable() - It will create a new table in the existing database' \
+              '\n insertData(name,age) - it will insert the data into selected tables'
 
     v = input("Enter the function name you want:")
